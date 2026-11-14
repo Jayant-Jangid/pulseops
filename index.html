@@ -962,5 +962,95 @@
     </div>
   </footer>
 
-  </body>
+  <!-- Modal Dialog: Start Free Trial -->
+  <div class="modal-backdrop" id="trial-modal" role="dialog" aria-modal="true" aria-labelledby="trial-modal-title" hidden>
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-badge">14-Day Free Trial</span>
+          <h3 class="modal-title" id="trial-modal-title">Create your PulseOps workspace</h3>
+        </div>
+        <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog window">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form id="modal-trial-form" class="modal-form" novalidate>
+          <div class="form-group">
+            <label for="modal-email" class="form-label">Work Email Address <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="email" id="modal-email" class="form-input" placeholder="name@company.com" required autocomplete="email">
+            <span class="form-error-msg" id="modal-email-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-endpoint" class="form-label">First Endpoint to Monitor</label>
+            <input type="url" id="modal-endpoint" class="form-input" placeholder="https://api.yourdomain.com/healthz" value="https://api.example.com/healthz">
+            <span class="form-helper-text">You can add more endpoints or change this at any time.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-selected-plan" class="form-label">Selected Tier</label>
+            <input type="text" id="modal-selected-plan" class="form-input" value="Team Production" readonly>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="modal-submit-btn">
+            <span>Create Workspace</span>
+          </button>
+
+          <p class="modal-legal-text">
+            No credit card required. Free tier fallback remains available at end of trial.
+          </p>
+        </form>
+
+        <div id="modal-success-state" class="modal-success-card" hidden>
+          <div class="success-icon-badge" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <h4>Workspace Provisioned</h4>
+          <p>We've sent an activation link to <strong id="modal-confirm-email"></strong>.</p>
+          <button type="button" class="btn btn-secondary btn-sm" id="modal-done-btn">Dismiss</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sign In Placeholder Modal Dialog -->
+  <div class="modal-backdrop" id="login-modal" role="dialog" aria-modal="true" aria-labelledby="login-modal-title" hidden>
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title" id="login-modal-title">Sign In to PulseOps</h3>
+        <button type="button" class="modal-close-btn" id="login-modal-close" aria-label="Close dialog window">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="login-form" class="modal-form" novalidate>
+          <div class="form-group">
+            <label for="login-email" class="form-label">Email Address</label>
+            <input type="email" id="login-email" class="form-input" placeholder="developer@company.com" required>
+            <span class="form-error-msg" id="login-email-error" role="alert" aria-live="polite"></span>
+          </div>
+          <div class="form-group">
+            <label for="login-password" class="form-label">Password</label>
+            <input type="password" id="login-password" class="form-input" placeholder="Enter your password" required>
+            <span class="form-error-msg" id="login-pass-error" role="alert" aria-live="polite"></span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          <p class="modal-legal-text">This is a demonstration authentication dialogue.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
 </html>
