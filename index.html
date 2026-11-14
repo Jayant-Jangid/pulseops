@@ -198,10 +198,70 @@
               </div>
             </div>
 
-                      </div>
+            <!-- Regional Probes Status Table -->
+            <div class="dashboard-probes-container">
+              <div class="probes-table-header">
+                <span>Location Node</span>
+                <span>Response Time</span>
+                <span>HTTP Status</span>
+                <span>Verification State</span>
+              </div>
+              <div class="probes-list" id="probes-list">
+                <div class="probe-row" data-region="iad">
+                  <span class="probe-node">
+                    <span class="node-indicator online" aria-hidden="true"></span>
+                    US-East (N. Virginia, IAD)
+                  </span>
+                  <span class="probe-latency font-mono">31 ms</span>
+                  <span class="probe-status font-mono text-success">200 OK</span>
+                  <span class="probe-consensus">Verified</span>
+                </div>
+                <div class="probe-row" data-region="fra">
+                  <span class="probe-node">
+                    <span class="node-indicator online" aria-hidden="true"></span>
+                    EU-Central (Frankfurt, FRA)
+                  </span>
+                  <span class="probe-latency font-mono">48 ms</span>
+                  <span class="probe-status font-mono text-success">200 OK</span>
+                  <span class="probe-consensus">Verified</span>
+                </div>
+                <div class="probe-row" data-region="bom">
+                  <span class="probe-node">
+                    <span class="node-indicator online" aria-hidden="true"></span>
+                    AP-South (Mumbai, BOM)
+                  </span>
+                  <span class="probe-latency font-mono">84 ms</span>
+                  <span class="probe-status font-mono text-success">200 OK</span>
+                  <span class="probe-consensus">Verified</span>
+                </div>
+                <div class="probe-row" data-region="syd">
+                  <span class="probe-node">
+                    <span class="node-indicator online" aria-hidden="true"></span>
+                    AP-Southeast (Sydney, SYD)
+                  </span>
+                  <span class="probe-latency font-mono">112 ms</span>
+                  <span class="probe-status font-mono text-success">200 OK</span>
+                  <span class="probe-consensus">Verified</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Telemetry Bar Visualizer -->
+            <div class="telemetry-history">
+              <div class="telemetry-bar-header">
+                <span class="telemetry-bar-title">90-Day Continuous Incident Timeline</span>
+                <span class="telemetry-bar-legend font-mono">100% Operational (Past 24h)</span>
+              </div>
+              <div class="timeline-bars-track" id="timeline-bars-track" aria-label="Visual history of uptime over last 60 days">
+                <!-- Dynamically generated timeline nodes via JS for authentic variation -->
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-  </main>
+
+    <!-- Key Metrics Ribbon -->
+      </main>
 </body>
 </html>
