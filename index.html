@@ -744,6 +744,156 @@
     </section>
 
     <!-- Contact & Demo Request Section -->
-      </main>
-</body>
+    <section class="section contact-section" id="contact">
+      <div class="container contact-container">
+        <div class="contact-info-col">
+          <span class="section-tag">Direct Inquiry</span>
+          <h2 class="contact-title">Request a tailored engineering walkthrough</h2>
+          <p class="contact-desc">
+            Speak directly with a systems reliability architect to evaluate high-frequency probe configurations, VPC agent deployments, or custom enterprise terms.
+          </p>
+
+          <div class="contact-methods">
+            <div class="contact-method-item">
+              <div class="cm-icon-box" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </div>
+              <div class="cm-details">
+                <span class="cm-label">Engineering Desk</span>
+                <span class="cm-val font-mono">telemetry@pulseops.io</span>
+              </div>
+            </div>
+
+            <div class="contact-method-item">
+              <div class="cm-icon-box" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              </div>
+              <div class="cm-details">
+                <span class="cm-label">Average Response SLA</span>
+                <span class="cm-val">&lt; 15 minutes during standard operations</span>
+              </div>
+            </div>
+
+            <div class="contact-method-item">
+              <div class="cm-icon-box" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
+              <div class="cm-details">
+                <span class="cm-label">Regional Operations</span>
+                <span class="cm-val">San Francisco, Frankfurt, Bengaluru</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Column with Complete Client-side Validation -->
+        <div class="contact-form-col">
+          <div class="form-wrapper-card">
+            <!-- Form State: Active -->
+            <form id="contact-form" class="contact-form" novalidate>
+              <h3 class="form-heading">Schedule a Technical Demo</h3>
+              <p class="form-subtext">Fill in your requirements below and our engineering team will follow up.</p>
+
+              <div class="form-group">
+                <label for="contact-name" class="form-label">
+                  Full Name <span class="required-mark" aria-hidden="true">*</span>
+                </label>
+                <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. Alex Morgan" required autocomplete="name">
+                <span class="form-error-msg" id="name-error" role="alert" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-email" class="form-label">
+                  Work Email <span class="required-mark" aria-hidden="true">*</span>
+                </label>
+                <input type="email" id="contact-email" name="email" class="form-input" placeholder="alex@company.com" required autocomplete="email">
+                <span class="form-error-msg" id="email-error" role="alert" aria-live="polite"></span>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contact-company-size" class="form-label">Engineering Team Size</label>
+                  <select id="contact-company-size" name="teamSize" class="form-select">
+                    <option value="1-10">1 to 10 engineers</option>
+                    <option value="11-50" selected>11 to 50 engineers</option>
+                    <option value="51-200">51 to 200 engineers</option>
+                    <option value="200+">200+ engineers</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="contact-monitors" class="form-label">Endpoints to Monitor</label>
+                  <select id="contact-monitors" name="monitorsNeeded" class="form-select">
+                    <option value="under-25">&lt; 25 endpoints</option>
+                    <option value="25-100" selected>25 to 100 endpoints</option>
+                    <option value="100-500">100 to 500 endpoints</option>
+                    <option value="500+">500+ endpoints</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-message" class="form-label">
+                  Primary Telemetry Need <span class="required-mark" aria-hidden="true">*</span>
+                </label>
+                <textarea id="contact-message" name="message" class="form-textarea" rows="4" placeholder="Briefly describe your services, target protocols, or compliance requirements..." required></textarea>
+                <span class="form-error-msg" id="message-error" role="alert" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group checkbox-group">
+                <label class="checkbox-label" for="contact-consent">
+                  <input type="checkbox" id="contact-consent" name="consent" class="form-checkbox" required>
+                  <span class="checkbox-text">I consent to receiving service telemetry diagnostics and walkthrough updates.</span>
+                </label>
+                <span class="form-error-msg" id="consent-error" role="alert" aria-live="polite"></span>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block btn-submit" id="btn-submit-contact">
+                <span class="btn-text">Send Request</span>
+                <span class="btn-spinner" aria-hidden="true" hidden></span>
+              </button>
+
+              <p class="form-legal-note">
+                By submitting this form, you acknowledge our data retention policy and terms of service.
+              </p>
+            </form>
+
+            <!-- Form State: Success Feedback (Initially Hidden) -->
+            <div id="contact-success-state" class="form-success-card" hidden role="region" aria-label="Submission Confirmation">
+              <div class="success-icon-badge" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+              <h3 class="success-title">Walkthrough Request Received</h3>
+              <p class="success-desc">
+                Thank you, <strong id="success-user-name">Engineer</strong>. Your ticket reference has been logged. A reliability architect will contact <strong id="success-user-email">your email</strong> within one business hour.
+              </p>
+              <div class="ticket-meta-box">
+                <span class="ticket-label">Ticket Identifier:</span>
+                <code class="ticket-id font-mono" id="success-ticket-id">PL-948291</code>
+              </div>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-reset-form">
+                Submit Another Request
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  </body>
 </html>
