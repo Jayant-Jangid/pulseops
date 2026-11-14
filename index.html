@@ -419,6 +419,41 @@
     </section>
 
     <!-- How It Works / Workflow Section -->
-      </main>
+    <section class="section workflow-section" id="how-it-works">
+      <div class="container">
+        <div class="section-heading text-center">
+          <span class="section-tag">System Architecture</span>
+          <h2 class="section-title">How PulseOps protects production availability</h2>
+          <p class="section-subtitle">
+            From initial probe execution to automated stakeholder notification, understand the 3-step lifecycle of an operational health check.
+          </p>
+        </div>
+
+        <div class="workflow-steps">
+          <!-- Step 1 -->
+          <div class="workflow-step-card">
+            <div class="step-badge font-mono">01</div>
+            <h3 class="step-title">Register Target Endpoints</h3>
+            <p class="step-text">
+              Declare HTTP/S URLs, TCP ports, DNS nameservers, or background job heartbeats via the web dashboard or our Terraform provider.
+            </p>
+            <div class="code-snippet-box">
+              <div class="code-header">
+                <span class="code-lang">terraform</span>
+                <span class="code-file">monitors.tf</span>
+              </div>
+              <pre class="code-content font-mono"><code>resource "pulseops_monitor" "api" {
+  name     = "Core Payments Gateway"
+  url      = "https://api.acme.io/v1/ping"
+  interval = 30
+  regions  = ["iad", "fra", "bom"]
+}</code></pre>
+            </div>
+          </div>
+
+                  </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
