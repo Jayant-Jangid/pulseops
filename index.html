@@ -166,6 +166,38 @@
             </div>
 
             <!-- Dashboard Summary Metrics -->
+            <div class="dashboard-metrics-grid">
+              <div class="metric-block">
+                <span class="metric-label">Uptime (Last 90 Days)</span>
+                <span class="metric-val text-success">99.98%</span>
+                <span class="metric-sub">0 degraded incidents</span>
+              </div>
+              <div class="metric-block">
+                <span class="metric-label">Global P95 Latency</span>
+                <span class="metric-val">42 ms</span>
+                <span class="metric-sub text-success">-4ms vs last week</span>
+              </div>
+              <div class="metric-block">
+                <span class="metric-label">SSL Expiry</span>
+                <span class="metric-val">82 Days</span>
+                <span class="metric-sub">Let's Encrypt Authority</span>
+              </div>
+              <div class="metric-block">
+                <span class="metric-label">Active Probe Frequency</span>
+                <span class="metric-val">30s Interval</span>
+                <span class="metric-sub">Multi-regional consensus</span>
+              </div>
+            </div>
+
+            <!-- Interactive Probe Ping Simulator Tool -->
+            <div class="dashboard-simulator-bar">
+              <label for="probe-url-input" class="simulator-label">Simulate Diagnostic Probe</label>
+              <div class="simulator-input-wrap">
+                <input type="text" id="probe-url-input" class="simulator-input" value="https://api.acme-corp.internal/v2/catalog" aria-label="Endpoint URL to test">
+                <button type="button" class="btn btn-primary btn-sm" id="btn-run-probe">Run Probe</button>
+              </div>
+            </div>
+
                       </div>
         </div>
       </div>
