@@ -659,6 +659,91 @@
     </section>
 
     <!-- FAQ Accordion Section -->
+    <section class="section faq-section" id="faq">
+      <div class="container faq-container">
+        <div class="section-heading text-center">
+          <span class="section-tag">Common Inquiries</span>
+          <h2 class="section-title">Frequently asked technical questions</h2>
+          <p class="section-subtitle">
+            Learn more about how PulseOps operates, our geographic probe network, and billing structures.
+          </p>
+        </div>
+
+        <div class="faq-accordion" id="faq-accordion">
+          <div class="faq-item">
+            <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-ans-1" id="faq-q-1">
+              <span class="faq-question">How does PulseOps prevent false-positive downtime alerts?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-panel" id="faq-ans-1" role="region" aria-labelledby="faq-q-1" hidden>
+              <div class="faq-panel-content">
+                When an individual regional node receives a non-200 HTTP code, a network timeout, or a broken SSL handshake, it does not immediately dispatch an on-call alert. Instead, two additional nodes in separate geographical datacenters execute verification probes within two seconds. An alert is only dispatched when multi-region consensus is established.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-ans-2" id="faq-q-2">
+              <span class="faq-question">Can I monitor endpoints located behind private firewalls or VPNs?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-panel" id="faq-ans-2" role="region" aria-labelledby="faq-q-2" hidden>
+              <div class="faq-panel-content">
+                Yes. You can either allowlist our published static IP ranges on your border firewall, or run our lightweight, open-source internal agent daemon (packaged as a single binary or Docker container) within your private VPC to report heartbeats outward over HTTPS.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-ans-3" id="faq-q-3">
+              <span class="faq-question">What alert destinations and integrations are supported?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-panel" id="faq-ans-3" role="region" aria-labelledby="faq-q-3" hidden>
+              <div class="faq-panel-content">
+                We provide native integrations for Slack, PagerDuty, Opsgenie, Discord, Telegram, Microsoft Teams, SMS, voice phone calls, and custom HMAC-signed HTTP webhooks for automated orchestration pipelines.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-ans-4" id="faq-q-4">
+              <span class="faq-question">Can I configure custom request headers or body assertions?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-panel" id="faq-ans-4" role="region" aria-labelledby="faq-q-4" hidden>
+              <div class="faq-panel-content">
+                Yes. You can specify custom HTTP methods (GET, POST, PUT, DELETE, HEAD), insert custom Authorization or API Key headers, submit JSON or form payloads, and write assertions evaluating status codes, response times, header existence, or regex body pattern matching.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-ans-5" id="faq-q-5">
+              <span class="faq-question">Is there a credit card requirement for the free trial?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-panel" id="faq-ans-5" role="region" aria-labelledby="faq-q-5" hidden>
+              <div class="faq-panel-content">
+                No credit card is required. You can test all Team tier features for 14 days without payment information. At the end of 14 days, you may choose a paid plan or continue on the Starter free-forever plan with 10 endpoints.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Demo Request Section -->
       </main>
 </body>
 </html>
