@@ -451,9 +451,59 @@
             </div>
           </div>
 
-                  </div>
+          <!-- Step 2 -->
+          <div class="workflow-step-card">
+            <div class="step-badge font-mono">02</div>
+            <h3 class="step-title">Distributed Consensus Polling</h3>
+            <p class="step-text">
+              16 independent nodes probe your service every 10 to 60 seconds. Every response captures DNS lookup time, TLS handshake latency, and payload integrity.
+            </p>
+            <div class="workflow-visual-list">
+              <div class="wv-item">
+                <span class="wv-dot active"></span>
+                <span>DNS Resolution: 4.2ms</span>
+              </div>
+              <div class="wv-item">
+                <span class="wv-dot active"></span>
+                <span>TLS Handshake: 18.6ms</span>
+              </div>
+              <div class="wv-item">
+                <span class="wv-dot active"></span>
+                <span>Time To First Byte: 22.1ms</span>
+              </div>
+              <div class="wv-item">
+                <span class="wv-dot active"></span>
+                <span>Response Body: Valid JSON Schema</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="workflow-step-card">
+            <div class="step-badge font-mono">03</div>
+            <h3 class="step-title">Intelligent Triage &amp; Alert Routing</h3>
+            <p class="step-text">
+              If an endpoint degrades, alerts trigger immediately with automated traceroute and response header dumps to pinpoint root causes without investigation delays.
+            </p>
+            <div class="code-snippet-box">
+              <div class="code-header">
+                <span class="code-lang">alert payload</span>
+                <span class="code-file">incident-alert.json</span>
+              </div>
+              <pre class="code-content font-mono"><code>{
+  "incident_id": "inc_94819",
+  "service": "Core Payments Gateway",
+  "status": "CRITICAL_LATENCY",
+  "p95_latency": "1420ms (Threshold: 500ms)",
+  "notified": ["#oncall-infra", "pagerduty"]
+}</code></pre>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
-  </main>
+
+    <!-- Pricing Section -->
+      </main>
 </body>
 </html>
