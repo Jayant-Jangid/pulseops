@@ -330,11 +330,35 @@
     }
   };
 
+  /* ==========================================================================
+     5. FAQ Accessible Accordion
+     ========================================================================== */
+  const FaqAccordion = {
+    init() {
+      this.triggers = document.querySelectorAll('.faq-trigger');
+
+      this.triggers.forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+          const targetId = trigger.getAttribute('aria-controls');
+          const panel = document.getElementById(targetId);
+
+          if (!panel) return;
+
+          // Toggle state
+          trigger.setAttribute('aria-expanded', String(!isExpanded));
+          panel.hidden = isExpanded;
+        });
+      });
+    }
+  };
+
   
   document.addEventListener('DOMContentLoaded', () => {
     ThemeController.init();
     NavigationController.init();
     TelemetrySimulator.init();
     PricingController.init();
+    FaqAccordion.init();
   });
 })();
