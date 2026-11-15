@@ -727,8 +727,23 @@
     }
   };
 
-  
+  /* ==========================================================================
+     8. Footer Dynamic Year
+     ========================================================================== */
+  const FooterController = {
+    init() {
+      const yearElem = document.getElementById('current-year');
+      if (yearElem) {
+        yearElem.textContent = new Date().getFullYear();
+      }
+    }
+  };
+
+  /* ==========================================================================
+     DOM Ready Initialization
+     ========================================================================== */
   document.addEventListener('DOMContentLoaded', () => {
+    document.body.style.overflow = '';
     ThemeController.init();
     NavigationController.init();
     TelemetrySimulator.init();
@@ -736,5 +751,6 @@
     FaqAccordion.init();
     ContactFormController.init();
     ModalController.init();
+    FooterController.init();
   });
 })();
