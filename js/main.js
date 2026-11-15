@@ -353,6 +353,175 @@
     }
   };
 
+  /* ==========================================================================
+     6. Form Validation & Submission (Zero Emojis, Robust Handling)
+     ========================================================================== */
+  const ContactFormController = {
+    init() {
+      this.form = document.getElementById('contact-form');
+      this.successCard = document.getElementById('contact-success-state');
+      this.resetBtn = document.getElementById('btn-reset-form');
+
+      if (!this.form) return;
+
+      this.nameInput = document.getElementById('contact-name');
+      this.emailInput = document.getElementById('contact-email');
+      this.messageInput = document.getElementById('contact-message');
+      this.consentInput = document.getElementById('contact-consent');
+      this.submitBtn = document.getElementById('btn-submit-contact');
+
+      this.setupLiveValidation();
+      this.setupSubmit();
+      this.setupReset();
+    },
+
+    validateField(field, errorElemId, validationFn, errorMsg) {
+      const errorElem = document.getElementById(errorElemId);
+      const isValid = validationFn(field.value);
+
+      if (!isValid) {
+        field.classList.add('is-invalid');
+        field.setAttribute('aria-invalid', 'true');
+        if (errorElem) errorElem.textContent = errorMsg;
+        return false;
+      } else {
+        field.classList.remove('is-invalid');
+        field.removeAttribute('aria-invalid');
+        if (errorElem) errorElem.textContent = '';
+        return true;
+      }
+    },
+
+    setupLiveValidation() {
+      // Name validation: minimum 2 characters
+      this.nameInput.addEventListener('blur', () => {
+        this.validateField(
+          this.nameInput,
+          'name-error',
+          (val) => val.trim().length >= 2,
+          'Please enter your full name (minimum 2 characters).'
+        );
+      });
+
+      // Email validation: standard RFC compliant email pattern
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      this.emailInput.addEventListener('blur', () => {
+        this.validateField(
+          this.emailInput,
+          'email-error',
+          (val) => emailRegex.test(val.trim()),
+          'Please provide a valid business email address.'
+        );
+      });
+
+      // Message validation: minimum 10 characters
+      this.messageInput.addEventListener('blur', () => {
+        this.validateField(
+          this.messageInput,
+          'message-error',
+          (val) => val.trim().length >= 10,
+          'Please describe your requirements (minimum 10 characters).'
+        );
+      });
+
+      // Consent checkbox
+      this.consentInput.addEventListener('change', () => {
+        const errorElem = document.getElementById('consent-error');
+        if (!this.consentInput.checked) {
+          if (errorElem) errorElem.textContent = 'Please confirm consent to proceed.';
+        } else {
+          if (errorElem) errorElem.textContent = '';
+        }
+      });
+    },
+
+    setupSubmit() {
+      this.form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        const isNameValid = this.validateField(
+          this.nameInput,
+          'name-error',
+          (val) => val.trim().length >= 2,
+          'Please enter your full name (minimum 2 characters).'
+        );
+
+        const isEmailValid = this.validateField(
+          this.emailInput,
+          'email-error',
+          (val) => emailRegex.test(val.trim()),
+          'Please provide a valid business email address.'
+        );
+
+        const isMsgValid = this.validateField(
+          this.messageInput,
+          'message-error',
+          (val) => val.trim().length >= 10,
+          'Please describe your requirements (minimum 10 characters).'
+        );
+
+        const consentError = document.getElementById('consent-error');
+        let isConsentValid = true;
+        if (!this.consentInput.checked) {
+          isConsentValid = false;
+          if (consentError) consentError.textContent = 'Please confirm consent to proceed.';
+        } else {
+          if (consentError) consentError.textContent = '';
+        }
+
+        if (!isNameValid || !isEmailValid || !isMsgValid || !isConsentValid) {
+          // Focus first invalid element
+          const firstInvalid = this.form.querySelector('.is-invalid, input:invalid');
+          if (firstInvalid) firstInvalid.focus();
+          return;
+        }
+
+        // Display loading state
+        const btnText = this.submitBtn.querySelector('.btn-text');
+        const btnSpinner = this.submitBtn.querySelector('.btn-spinner');
+        this.submitBtn.disabled = true;
+        if (btnText) btnText.textContent = 'Submitting Request...';
+        if (btnSpinner) btnSpinner.hidden = false;
+
+        // Simulate asynchronous dispatch
+        setTimeout(() => {
+          this.submitBtn.disabled = false;
+          if (btnText) btnText.textContent = 'Send Request';
+          if (btnSpinner) btnSpinner.hidden = true;
+
+          // Populate success state details
+          const userName = this.nameInput.value.trim();
+          const userEmail = this.emailInput.value.trim();
+          const randomId = 'PL-' + Math.floor(100000 + Math.random() * 900000);
+
+          const nameDisplay = document.getElementById('success-user-name');
+          const emailDisplay = document.getElementById('success-user-email');
+          const ticketDisplay = document.getElementById('success-ticket-id');
+
+          if (nameDisplay) nameDisplay.textContent = userName;
+          if (emailDisplay) emailDisplay.textContent = userEmail;
+          if (ticketDisplay) ticketDisplay.textContent = randomId;
+
+          // Switch views
+          this.form.hidden = true;
+          this.successCard.hidden = false;
+          this.successCard.focus();
+        }, 800);
+      });
+    },
+
+    setupReset() {
+      if (!this.resetBtn) return;
+      this.resetBtn.addEventListener('click', () => {
+        this.form.reset();
+        this.form.hidden = false;
+        this.successCard.hidden = true;
+        this.nameInput.focus();
+      });
+    }
+  };
+
   
   document.addEventListener('DOMContentLoaded', () => {
     ThemeController.init();
@@ -360,5 +529,6 @@
     TelemetrySimulator.init();
     PricingController.init();
     FaqAccordion.init();
+    ContactFormController.init();
   });
 })();
