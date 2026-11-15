@@ -79,3 +79,30 @@ If using Visual Studio Code:
 
 ---
 
+## Screenshots
+
+Visual walkthrough of the implemented sections and working interactions:
+
+### 1. Hero Section & Sticky Navigation
+![Hero Section](screenshots/01-hero-section.png)
+
+### 2. Live Telemetry Dashboard & Diagnostic Probe Simulator
+![Telemetry Dashboard](screenshots/02-telemetry-dashboard.png)
+
+### 3. Core Infrastructure Features Grid
+![Core Features](screenshots/03-features-grid.jpg)
+
+### 4. Transparent Pricing Matrix & Billing Switcher
+![Pricing Matrix](screenshots/04-pricing-matrix.png)
+
+### 5. Technical FAQ Accordion Panels
+![FAQ Accordion](screenshots/05-faq-accordion.png)
+
+### 6. Technical Walkthrough & Demo Request Form
+![Demo Request Form](screenshots/06-contact-form.png)
+
+### 7. Multi-Column Site Footer & Operational Health Badge
+![Site Footer](screenshots/07-site-footer.png)
+
+### 8. Centered Workspace Provisioning Modal Dialog
+![Modal Dialog](screenshots/08-modal-dialog.png)
