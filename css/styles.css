@@ -1817,7 +1817,7 @@ ul, ol {
   box-shadow: var(--shadow-modal);
   width: 100%;
   max-width: 480px;
-  max-height: calc(100vh - 48px);
+  max-height: calc(100vh - 48px); /* viewport safe */
   display: flex;
   flex-direction: column;
   overflow: hidden;
