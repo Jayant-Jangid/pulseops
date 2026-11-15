@@ -288,10 +288,53 @@
     }
   };
 
+  /* ==========================================================================
+     4. Pricing Calculator & Annual Billing Toggle
+     ========================================================================== */
+  const PricingController = {
+    init() {
+      this.toggleSwitch = document.getElementById('billing-toggle');
+      this.priceAmounts = document.querySelectorAll('.price-amount');
+      this.teamNote = document.getElementById('team-billing-note');
+      this.enterpriseNote = document.getElementById('enterprise-billing-note');
+
+      if (!this.toggleSwitch) return;
+
+      this.toggleSwitch.addEventListener('click', () => {
+        const isAnnual = this.toggleSwitch.getAttribute('aria-checked') === 'true';
+        const nextState = !isAnnual;
+
+        this.toggleSwitch.setAttribute('aria-checked', String(nextState));
+        this.updatePrices(nextState);
+      });
+    },
+
+    updatePrices(isAnnual) {
+      this.priceAmounts.forEach((el) => {
+        const monthly = el.getAttribute('data-monthly');
+        const annual = el.getAttribute('data-annual');
+        el.textContent = isAnnual ? annual : monthly;
+      });
+
+      if (this.teamNote) {
+        this.teamNote.textContent = isAnnual
+          ? 'Billed annually ($228/year - Save $60)'
+          : 'Billed monthly ($288/year)';
+      }
+
+      if (this.enterpriseNote) {
+        this.enterpriseNote.textContent = isAnnual
+          ? 'Billed annually ($852/year - Save $216)'
+          : 'Billed monthly ($1,068/year)';
+      }
+    }
+  };
+
   
   document.addEventListener('DOMContentLoaded', () => {
     ThemeController.init();
     NavigationController.init();
     TelemetrySimulator.init();
+    PricingController.init();
   });
 })();
