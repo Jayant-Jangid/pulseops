@@ -522,6 +522,211 @@
     }
   };
 
+  /* ==========================================================================
+     7. Accessible Modal Windows (Trial & Authentication)
+     ========================================================================== */
+  const ModalController = {
+    init() {
+      this.triggers = document.querySelectorAll('[data-modal-target]');
+      this.closeButtons = document.querySelectorAll('.modal-close-btn');
+      this.backdrops = document.querySelectorAll('.modal-backdrop');
+
+      this.setupTriggers();
+      this.setupCloseEvents();
+      this.setupTrialForm();
+      this.setupLoginForm();
+    },
+
+    openModal(modalId, sourcePlan) {
+      const modal = document.getElementById(modalId);
+      if (!modal) return;
+
+      // Ensure form is visible and success state is hidden on modal open
+      const form = modal.querySelector('form');
+      const successState = modal.querySelector('.modal-success-card');
+      const errorMsg = modal.querySelector('.form-error-msg');
+      if (form) form.hidden = false;
+      if (successState) successState.hidden = true;
+      if (errorMsg) errorMsg.textContent = '';
+
+      modal.hidden = false;
+      modal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+
+      // Set plan name if trigger provided one
+      if (sourcePlan) {
+        const planInput = modal.querySelector('#modal-selected-plan');
+        if (planInput) planInput.value = sourcePlan;
+      }
+
+      // Auto-focus primary input
+      const firstInput = modal.querySelector('input:not([readonly]), button');
+      if (firstInput) firstInput.focus();
+    },
+
+    closeModal(modal) {
+      if (!modal) return;
+      modal.classList.remove('is-open');
+      modal.hidden = true;
+      document.body.style.overflow = '';
+    },
+
+    setupTriggers() {
+      this.triggers.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-modal-target');
+          const plan = btn.getAttribute('data-plan');
+          this.openModal(targetId, plan);
+        });
+      });
+
+      // Sign In buttons
+      const desktopLogin = document.getElementById('btn-login');
+      const mobileLogin = document.getElementById('mobile-login-btn');
+      if (desktopLogin) {
+        desktopLogin.addEventListener('click', () => this.openModal('login-modal'));
+      }
+      if (mobileLogin) {
+        mobileLogin.addEventListener('click', () => this.openModal('login-modal'));
+      }
+    },
+
+    setupCloseEvents() {
+      this.closeButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const modal = btn.closest('.modal-backdrop');
+          this.closeModal(modal);
+        });
+      });
+
+      this.backdrops.forEach((backdrop) => {
+        backdrop.addEventListener('click', (e) => {
+          if (e.target === backdrop) {
+            this.closeModal(backdrop);
+          }
+        });
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const openModal = document.querySelector('.modal-backdrop.is-open');
+          if (openModal) {
+            this.closeModal(openModal);
+          }
+        }
+      });
+    },
+
+    setupTrialForm() {
+      const form = document.getElementById('modal-trial-form');
+      const successState = document.getElementById('modal-success-state');
+      const dismissBtn = document.getElementById('modal-done-btn');
+      const emailInput = document.getElementById('modal-email');
+      const errorMsg = document.getElementById('modal-email-error');
+
+      if (!form) return;
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = emailInput.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+        if (!emailRegex.test(email)) {
+          emailInput.classList.add('is-invalid');
+          if (errorMsg) errorMsg.textContent = 'Please enter a valid business email.';
+          emailInput.focus();
+          return;
+        }
+
+        emailInput.classList.remove('is-invalid');
+        if (errorMsg) errorMsg.textContent = '';
+
+        const submitBtn = document.getElementById('modal-submit-btn');
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Provisioning...';
+        }
+
+        setTimeout(() => {
+          form.hidden = true;
+          if (successState) {
+            successState.hidden = false;
+            const confirmEmail = document.getElementById('modal-confirm-email');
+            if (confirmEmail) confirmEmail.textContent = email;
+          }
+        }, 700);
+      });
+
+      if (dismissBtn) {
+        dismissBtn.addEventListener('click', () => {
+          const modal = dismissBtn.closest('.modal-backdrop');
+          this.closeModal(modal);
+          setTimeout(() => {
+            form.reset();
+            form.hidden = false;
+            if (successState) successState.hidden = true;
+            const submitBtn = document.getElementById('modal-submit-btn');
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Create Workspace';
+            }
+          }, 300);
+        });
+      }
+    },
+
+    setupLoginForm() {
+      const form = document.getElementById('login-form');
+      if (!form) return;
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('login-email');
+        const pass = document.getElementById('login-password');
+        const emailError = document.getElementById('login-email-error');
+        const passError = document.getElementById('login-pass-error');
+
+        let valid = true;
+        if (!email.value.trim()) {
+          email.classList.add('is-invalid');
+          if (emailError) emailError.textContent = 'Email address is required.';
+          valid = false;
+        } else {
+          email.classList.remove('is-invalid');
+          if (emailError) emailError.textContent = '';
+        }
+
+        if (!pass.value.trim()) {
+          pass.classList.add('is-invalid');
+          if (passError) passError.textContent = 'Password is required.';
+          valid = false;
+        } else {
+          pass.classList.remove('is-invalid');
+          if (passError) passError.textContent = '';
+        }
+
+        if (!valid) return;
+
+        const btn = form.querySelector('button[type="submit"]');
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = 'Authenticating...';
+        }
+
+        setTimeout(() => {
+          alert('Demonstration: Successfully authenticated as ' + email.value.trim());
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = 'Sign In';
+          }
+          const modal = form.closest('.modal-backdrop');
+          this.closeModal(modal);
+          form.reset();
+        }, 600);
+      });
+    }
+  };
+
   
   document.addEventListener('DOMContentLoaded', () => {
     ThemeController.init();
@@ -530,5 +735,6 @@
     PricingController.init();
     FaqAccordion.init();
     ContactFormController.init();
+    ModalController.init();
   });
 })();
