@@ -165,9 +165,133 @@
     }
   };
 
+  /* ==========================================================================
+     3. Hero Diagnostic Probe Simulator & 90-Day Telemetry Bar
+     ========================================================================== */
+  const TelemetrySimulator = {
+    init() {
+      this.probeBtn = document.getElementById('btn-run-probe');
+      this.probeInput = document.getElementById('probe-url-input');
+      this.probesList = document.getElementById('probes-list');
+      this.timelineTrack = document.getElementById('timeline-bars-track');
+
+      this.setupTimelineNodes();
+      this.setupInteractiveProbes();
+    },
+
+    setupTimelineNodes() {
+      if (!this.timelineTrack) return;
+      this.timelineTrack.innerHTML = '';
+
+      // Generate 60 nodes representing 60 days of historical uptime
+      const totalNodes = 60;
+      // Index 38 represents a planned 3-minute maintenance window
+      const maintenanceDayIndex = 38;
+
+      for (let i = 0; i < totalNodes; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'timeline-bar-node';
+        bar.setAttribute('tabindex', '0');
+
+        const dayNumber = totalNodes - i;
+        if (i === maintenanceDayIndex) {
+          bar.classList.add('degraded');
+          bar.setAttribute('title', `Day -${dayNumber}: 99.85% (Scheduled Kernel Update, 3m)`);
+          bar.setAttribute('aria-label', `Day -${dayNumber}: 99.85% uptime`);
+        } else {
+          bar.setAttribute('title', `Day -${dayNumber}: 100.00% Operational (0 incidents)`);
+          bar.setAttribute('aria-label', `Day -${dayNumber}: 100.00% uptime`);
+        }
+
+        this.timelineTrack.appendChild(bar);
+      }
+    },
+
+    setupInteractiveProbes() {
+      if (!this.probeBtn || !this.probeInput || !this.probesList) return;
+
+      this.probeBtn.addEventListener('click', () => {
+        const targetUrl = this.probeInput.value.trim();
+        if (!targetUrl) {
+          this.probeInput.focus();
+          return;
+        }
+
+        this.runSimulation();
+      });
+
+      this.probeInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          this.probeBtn.click();
+        }
+      });
+    },
+
+    runSimulation() {
+      const rows = this.probesList.querySelectorAll('.probe-row');
+      this.probeBtn.disabled = true;
+      this.probeBtn.textContent = 'Probing...';
+
+      // Set rows to testing state
+      rows.forEach((row) => {
+        const indicator = row.querySelector('.node-indicator');
+        const latencyElem = row.querySelector('.probe-latency');
+        const statusElem = row.querySelector('.probe-status');
+        const consensusElem = row.querySelector('.probe-consensus');
+
+        if (indicator) {
+          indicator.className = 'node-indicator probing';
+        }
+        if (latencyElem) latencyElem.textContent = 'Testing...';
+        if (statusElem) {
+          statusElem.textContent = '---';
+          statusElem.className = 'probe-status font-mono';
+        }
+        if (consensusElem) consensusElem.textContent = 'In-Flight';
+      });
+
+      // Stagger simulated node resolutions
+      const regions = [
+        { selector: '[data-region="iad"]', baseLatency: 28, jitter: 8 },
+        { selector: '[data-region="fra"]', baseLatency: 44, jitter: 12 },
+        { selector: '[data-region="bom"]', baseLatency: 82, jitter: 15 },
+        { selector: '[data-region="syd"]', baseLatency: 108, jitter: 18 }
+      ];
+
+      regions.forEach((region, idx) => {
+        setTimeout(() => {
+          const row = this.probesList.querySelector(region.selector);
+          if (!row) return;
+
+          const measuredLatency = region.baseLatency + Math.floor(Math.random() * region.jitter);
+          const indicator = row.querySelector('.node-indicator');
+          const latencyElem = row.querySelector('.probe-latency');
+          const statusElem = row.querySelector('.probe-status');
+          const consensusElem = row.querySelector('.probe-consensus');
+
+          if (indicator) indicator.className = 'node-indicator online';
+          if (latencyElem) latencyElem.textContent = `${measuredLatency} ms`;
+          if (statusElem) {
+            statusElem.textContent = '200 OK';
+            statusElem.className = 'probe-status font-mono text-success';
+          }
+          if (consensusElem) consensusElem.textContent = 'Verified';
+
+          // Reset button on final region probe completion
+          if (idx === regions.length - 1) {
+            this.probeBtn.disabled = false;
+            this.probeBtn.textContent = 'Run Probe';
+          }
+        }, 300 + idx * 220);
+      });
+    }
+  };
+
   
   document.addEventListener('DOMContentLoaded', () => {
     ThemeController.init();
     NavigationController.init();
+    TelemetrySimulator.init();
   });
 })();
