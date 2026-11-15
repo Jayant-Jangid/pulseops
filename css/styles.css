@@ -886,3 +886,95 @@ ul, ol {
   background-color: var(--accent-warning);
 }
 
+/* --------------------------------------------------------------------------
+   Metrics Ribbon
+   -------------------------------------------------------------------------- */
+.metrics-ribbon {
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: var(--space-xl) 0;
+}
+
+.metrics-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+}
+
+.ribbon-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ribbon-number {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.ribbon-label {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.ribbon-divider {
+  width: 1px;
+  height: 40px;
+  background-color: var(--border-subtle);
+}
+
+@media (max-width: 768px) {
+  .ribbon-divider {
+    display: none;
+  }
+  .metrics-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Generic Section Header Layout
+   -------------------------------------------------------------------------- */
+.section {
+  padding-top: var(--space-4xl);
+  padding-bottom: var(--space-4xl);
+}
+
+.section-heading {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--space-3xl);
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
